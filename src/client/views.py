@@ -1,0 +1,51 @@
+from django.shortcuts import render
+from django.http import HttpResponse
+from models import *
+from src.common.functions import *
+from src.server.views import *
+import json
+from django.core.files.storage import FileSystemStorage
+from django.core import serializers
+# Create your views here.
+
+def default(request):
+    return HttpResponse('none')
+
+def login_page(request):
+    return render(request, 'components/login.html', {})
+
+def admin_page(request):
+    return render(request, 'components/admin.html', {})
+
+def complainttypes_page(request):
+    return render(request, 'components/complainttypes.html', {})
+
+def users_page(request):
+    return render(request, 'components/users.html', {})
+
+def complaint_page(request):
+    if request.method == "GET":
+        id = request.GET["id"]
+        result = {}
+        data = list(complaint.objects.prefetch_related("complaintTypeId")
+                            .prefetch_related("userId").filter(id=id))
+        for i in range(len(data)):
+            result = {
+                "id":data[i].id,
+                "complaintType":data[i].complaintTypeId.description,
+                "description":data[i].description,
+                "address":data[i].address,
+                "location":data[i].location,
+                "userId":data[i].userId.email,
+                "userName":data[i].userId.name+" "+data[i].userId.lastName,
+                "lat": data[i].location.split(",")[0],
+                "long": data[i].location.split(",")[1]
+            }
+
+        return render(request, 'components/complaint.html', {
+            "complaintId":id,
+            "data": result
+            })
+    else:
+        return render(request, 'components/complaint.html', {})
+        

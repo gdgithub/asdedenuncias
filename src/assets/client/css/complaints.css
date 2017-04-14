@@ -1,0 +1,58 @@
+
+.parent_div{
+    width: 100%;
+    height: 100%;
+    background: white;
+    font-family: arial, verdana;
+}
+
+.complaintsdiv{
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    padding-top:20px;
+    background: white;
+}
+
+#map{
+    width: 100%;
+    height: 50%;
+    background: white;
+}
+
+.ictable{
+    width: 100%;
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+
+.ictable td{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgb(242,242,242);
+}
+
+.clabel{
+    font-size: 15px;
+    font-weight: bold;
+    width: 150px;
+    border-right: 1px solid rgb(242,242,242);
+}
+
+.cvalue{
+    font-size: 15px;
+    padding-left: 10px;
+}
+
+.user_email{
+    cursor:pointer;
+}
+
+.hidden{
+    display: none;
+}
+
+.back_img{
+    width: 20px;
+    background: rgb(242,242,242);
+}

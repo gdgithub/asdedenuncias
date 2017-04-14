@@ -1,0 +1,88 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'client/css/complaints.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'adm/css/main.css' %}" />
+
+
+    <div class="complaint_container">
+
+        <div class="parent_div">  
+            <div class="complaintsdiv">
+                <!--<img class="back_img" src="/static/images/back.png"></img>-->
+                <h3 class="ui dividing header">Denuncias No. {{complaintId}}</h3>
+                <input type="text" class="location-long hidden" value={{data.long}}></input>
+                <input type="text" class="location-lat hidden" value={{data.lat}}></input>
+
+                <section class="info">
+                    <table class="ictable">
+                        <tr>
+                            <td class="clabel">Municipe:</td>
+                            <td class="cvalue">{{data.userName}} (<a class="user_email" href="mailto:{{data.userId}}">{{data.userId}}</a>)</td>
+                        </tr>
+                        <tr>
+                            <td class="clabel">Tipo de denuncia:</td>
+                            <td class="cvalue">{{data.complaintType}}</td>
+                        </tr>
+                        <tr>
+                            <td class="clabel">Descripcion:</td>
+                            <td class="cvalue" style="max-width: 100px;  text-overflow:ellipsis; overflow:hidden;">{{data.description}}</td>
+                        </tr>
+                        <tr>
+                            <td class="clabel">Direccion:</td>
+                            <td class="cvalue">{{data.address}}</td>
+                        </tr>
+                        <tr>
+                            <td class="clabel">Ubicacion:</td>
+                            <td class="cvalue">{{data.location}}</td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <div id="map"></div>
+                </section>
+                <section>
+                    <table>
+                        <tr>
+                            <td>
+                                <button>En Proceso</button>
+                            </td>
+                            <td>
+                                <button>Aceptar</button>
+                            </td>
+                            <td>
+                                <button>Cancelar</button>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function initMap() {
+            var myLatLng = {lat: parseFloat($(".location-lat").val()), lng: parseFloat($(".location-long").val())};
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16,
+            center: myLatLng
+            });
+
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Hello World!'
+            });
+        }
+                </script>
+    <script type="text/javascript" src="{% static '3rd_party/alertify/js/alertify.js' %}"></script>
+    <script type="text/javascript" src="{% static 'client/js/complaints.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvLdrWSUbltOgtfvZKyv2_5ydt5PGgEdM&callback=initMap"
+    async defer></script>
+    
+
+{% endblock %}

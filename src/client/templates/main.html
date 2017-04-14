@@ -1,0 +1,81 @@
+<html lang="es">
+
+<head>
+    <meta content=t ext/html charset=UTF-8>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=yes" />
+
+    <!-- Site Properties -->
+    <title>ASDE - Denuncias</title>
+
+    {% load staticfiles %}
+
+    <link rel="stylesheet" type="text/css" href="{% static '3rd_party/semantic/semantic.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'adm/css/menu.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'adm/css/dropdown.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'adm/css/main.css' %}" />
+
+    <link rel="stylesheet" type="text/css" href="{% static '3rd_party/alertify/css/alertify.css' %}" />
+
+    <script type="text/javascript" src="{% static '3rd_party/jquery/jquery-2.2.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '3rd_party/semantic/semantic.js' %}"></script>
+    <script type="text/javascript" src="{% static 'client/js/common.js' %}"></script>
+    <script type="text/javascript" src="{% static '3rd_party/alertify/js/alertify.js' %}"></script>
+
+
+    <style type="text/css">
+        
+        .ui.menu .item img.logo {
+            margin-right: 1.5em;
+        }
+        
+        .main.container {
+            margin-top: 7em;
+        }
+        
+        .wireframe {
+            margin-top: 2em;
+        }
+        
+        .ui.footer.segment {
+            margin: 5em 0em 0em;
+            padding: 5em 0em;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <div class="ui fixed inverted menu">
+        <div class="ui container">
+            <a href="#" class="header item">
+                <img class="logo" src="{% static 'adm/img/UNPHU.jpg' %}"> ASDE APP
+            </a>
+            <a href="/client/admin" class="item">Denuncias</a>
+            <div class="ui simple dropdown item">
+                Administracion <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a class="item" href="/client/admin/complainttypes" >Tipos de denuncias</a>
+                    <a class="item" href="/client/admin/users">Usuarios</a>
+                </div>
+            </div>
+            <a class="spacesdivider"></a>
+            <div class="ui simple dropdown item account">
+                Cuentas <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a class="item logOut" >Cerrar Sesion</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="ui main text container">
+        {% csrf_token %} {% block content %}{% endblock %}
+    </div>
+
+</body>
+
+</html>

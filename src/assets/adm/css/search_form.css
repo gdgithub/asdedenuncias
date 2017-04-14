@@ -1,0 +1,72 @@
+
+.result-div, .result-details-div{
+	display: none;
+}
+
+.td.table-options{
+	background-color: rgba(90,170,120,0.1);
+	cursor: pointer;
+	width: 20px;
+}
+.td.table-options:hover{
+	background-color: rgba(90,170,120,0.4);
+	cursor: pointer;
+	width: 20px;
+}
+
+.td.table-options li{
+	color: rgb(140,140,140);
+}
+
+.tr.divider{
+	background: rgb(255,255,255);
+}
+
+.plant-name{
+	text-align: center;
+}
+
+
+/*-----------------
+	Search details
+------------------*/
+.doc-content{
+	margin-top: 30px;
+}
+.result-details-div > .doc-content ul li{
+	font-size: 14px;
+	font-weight: bold;
+	color: rgb(70,70,70);
+}
+.section-title{
+	font-size: 26px;
+	font-weight: bold;
+
+}
+.resvalue{
+	margin-left: 10px;
+	font-weight: lighter;
+}
+
+
+/*-----------------
+	Overrides
+------------------*/
+.button.search{
+	color: rgb(240,240,240);
+	background-color: rgb(90,170,120);
+}
+
+.button.search:hover{
+	color: rgb(220,220,220);
+	background-color: rgb(90,170,120);
+}
+.button.new-search{
+	color: rgb(240,240,240);
+	background-color: rgb(90,170,120);
+}
+
+.button.new-search:hover{
+	color: rgb(220,220,220);
+	background-color: rgb(90,170,120);
+}

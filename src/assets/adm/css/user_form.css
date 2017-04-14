@@ -1,0 +1,29 @@
+.userpermision-form, .user-registration-form{
+	display: none;
+	padding-bottom: 10px;
+}
+
+
+.button.create-user{
+	color: rgb(245,245,245);
+	background-color: rgb(90,170,120);
+}
+
+.button.create-user:hover{
+	color: rgb(220,220,220);
+	background-color: rgb(90,170,120);
+}
+
+.button.save-user-permisions , .button.save-user{
+	color: rgb(245,245,245);
+	background-color: rgb(90,170,120);
+}
+
+.button.save-user-permisions:hover, .button.save-user:hover{
+	color: rgb(220,220,220);
+	background-color: rgb(90,170,120);
+}
+
+.setpermisions-buttom{
+	cursor: pointer;
+}

@@ -1,0 +1,92 @@
+<html lang="es">
+
+<head>
+    <meta content=t ext/html charset=UTF-8>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=yes" />
+
+    <!-- Site Properties -->
+    <title>ASDE - Iniciar Sesion</title>
+
+    {% load staticfiles %}
+
+    <link rel="stylesheet" type="text/css" href="{% static '3rd_party/semantic/semantic.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/site.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/container.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/menu.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/dropdown.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}" />
+
+    <style type="text/css">
+        body {
+            /*background-color: #FFFFFF;*/
+        }
+        
+        .ui.menu .item img.logo {
+            margin-right: 1.5em;
+        }
+        
+        .main.container {
+            margin-top: 7em;
+        }
+        
+        .wireframe {
+            margin-top: 2em;
+        }
+        
+        .ui.footer.segment {
+            margin: 5em 0em 0em;
+            padding: 5em 0em;
+        }
+    </style>
+
+</head>
+
+<body>
+    {% csrf_token %}
+    <div class="ui fixed inverted menu">
+        <div class="ui container">
+            <a href="#" class="header item">
+                <img class="logo" src="{% static 'adm/img/UNPHU.jpg' %}"> ASDE - Denuncias
+            </a>
+        </div>
+    </div>
+
+
+
+    <div class="ui main text container">
+
+        <div class="container login">
+            <h1 class="ui header">Inicie sesion </h1>
+
+            <div class="form-container">
+                <form class="ui form">
+                    <div class="field">
+                        <label>Usuario</label>
+                        <input type="text" class="email" placeholder="Usuario">
+                    </div>
+                    <div class="field">
+                        <label>Contraseña</label>
+                        <input type="text" class="password" placeholder="Contraseña">
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" tabindex="0" class="hidden">
+                            <!--<label>I agree to the Terms and Conditions</label>-->
+                        </div>
+                    </div>
+                    <button class="ui button logins">Acceder</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    <script type="text/javascript" src="{% static '3rd_party/jquery/jquery-2.2.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'client/js/login.js' %}"></script>
+    <script type="text/javascript" src="{% static '3rd_party/alertify/js/alertify.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+*.pyc
+*.py~
+*.js~
+*.html~
+*.css~
+venv/
+
