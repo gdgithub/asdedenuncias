@@ -61,9 +61,11 @@ $(document).ready(function() {
                 if(getCookie("ccount").length > 0){
                     if(data.data.length > getCookie("ccount")){
                         createCookie("ccount",data.data.length,3000);
-                        console.log("sdsd");
-                        alertify.success("Nueva solicitud");
+                        alertify.log("Nueva solicitud recibida. #"+data.data[data.data.length-1].id);
                     }
+                }
+                else{
+                    createCookie("ccount",data.data.length,3000);
                 }
             }
             hasNewRequest();

@@ -16,12 +16,13 @@ $(document).ready(function() {
         var dataDic = {
             "csrfmiddlewaretoken": $("input[name=csrfmiddlewaretoken]").val()
         }
-        postData("/server/getcomplaints/",dataDic,callback);
+        postData("/server/getcomplainttypes/",dataDic,callback);
     }
 
     function setTableComplaintValues(){
         
         var bodyTable = $(".complaintsTypes.body-table");
+        bodyTable.html("");
         getComplaintTypes(function(data){
             data = $.parseJSON(data);
             console.log(data);
@@ -31,10 +32,7 @@ $(document).ready(function() {
                     bodyTable.append(`
                     <tr>
                         <td>`+(i+1)+`</td>
-                        <td>`+element.complaintType+`</td>
-                        <td>`+element.address+`</td>
-                        <td>`+element.location+`</td>
-                        <td style="max-width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">`+element.description+`</td>
+                        <td>`+element.description+`</td>
                         <td>
                             <div class="ui small basic icon buttons">
                                 <button class="ui button edit" value=`+element.id+`><i class="file icon"></i></button>
@@ -46,7 +44,47 @@ $(document).ready(function() {
                 }, this);
                 
             $(".edit").click(function(){
-                location.assign("/client/admin/complaint?id="+$(this).val());
+                var id = $(this).val();
+                alertify
+                .defaultValue("")
+                .prompt("Introduzca el nuevo valor",
+                    function (val, ev) {
+                    ev.preventDefault();
+
+                    var dataDic = {
+                        "id":id,
+                        "description":val,
+                        "csrfmiddlewaretoken": $("input[name=csrfmiddlewaretoken]").val()
+                    }
+                    postData("/server/updatecomplainttypes/",dataDic,function(data){
+                        data = $.parseJSON(data);
+                        if(data.success){
+                            setTableComplaintValues();
+                        }
+                    });
+                    }, function(ev) {
+
+                    ev.preventDefault();
+                    }
+                );
+            });
+
+            $(".remove").click(function(){
+                var id = $(this).val();
+                alertify.confirm("¿Desea eliminar este valor?", function () {
+                var dataDic = {
+                        "id":id,
+                        "csrfmiddlewaretoken": $("input[name=csrfmiddlewaretoken]").val()
+                    }
+                    postData("/server/deletecomplainttypes/",dataDic,function(data){
+                        data = $.parseJSON(data);
+                        if(data.success){
+                            setTableComplaintValues();
+                        }
+                    });
+                    
+                }, function() {
+                });
             });
 
             }else{
@@ -56,5 +94,32 @@ $(document).ready(function() {
     }
 
     setTableComplaintValues();
+
+    $(".new").click(function(){
+        
+        alertify
+        .defaultValue("")
+        .prompt("Introduzca el valor",
+            function (val, ev) {
+            ev.preventDefault();
+
+            var dataDic = {
+                "description":val,
+                "csrfmiddlewaretoken": $("input[name=csrfmiddlewaretoken]").val()
+            }
+            postData("/server/savecomplainttypes/",dataDic,function(data){
+                data = $.parseJSON(data);
+                if(data.success){
+                    setTableComplaintValues();
+                }
+            });
+            }, function(ev) {
+
+            // The click event is in the event variable, so you can use it here.
+            ev.preventDefault();
+            }
+        );
+    
+    });
 
 });

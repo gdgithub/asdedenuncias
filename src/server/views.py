@@ -92,17 +92,83 @@ def getcomplaints(request):
 
 def getComplaintTypes(request):
     log = None
+    success = False
     data = []
     
     try:
         data = list(complaintTypes.objects.values().all())
+        success = True if data else False
     except Exception as e:
         log = str(e.message)
 
     return HttpResponse(json.dumps({
+        "success":success,
         "data": data,
         "log": log
         }))
+
+
+def saveComplaintTypes(request):
+    log = None
+    data = None
+    success = True
+    if request.method == "POST":
+        description = request.POST["description"]
+        try:
+            kwargs = {"description":description}
+            obj, created = filter_or_create(complaintTypes,kwargs)
+            if created:
+                data = obj.id
+            else:
+                data = obj.id
+        except Exception as e:
+            log = str(e.message)
+            success = False
+
+    return HttpResponse(json.dumps({
+        "success": success,
+        "data": data,
+        "log": log
+        }))
+
+def updateComplaintTypes(request):
+    log = None
+    data = None
+    success = True
+    if request.method == "POST":
+        id = request.POST["id"]
+        description = request.POST["description"]
+        try:
+            obj = complaintTypes.objects.filter(id=id).update(
+                description=description
+            )
+            data = id
+        except Exception as e:
+            log = str(e.message)
+            success = False
+
+    return HttpResponse(json.dumps({
+        "success": success,
+        "data": data,
+        "log": log
+        }))
+    
+def deleteComplaintTypes(request):
+    log = None
+    success = True
+    if request.method == "POST":
+        id = request.POST["id"]
+        try:
+            complaintTypes.objects.filter(id=id).delete()
+        except Exception as e:
+            log = str(e.message)
+            success = False
+
+    return HttpResponse(json.dumps({
+        "success": success,
+        "log": log
+        }))
+
 
 def saveComplaint(request):
     complaintTypeExist = False
@@ -111,14 +177,14 @@ def saveComplaint(request):
 
     if request.method == "POST":
         userId = request.POST["userId"]
-        complaintTypeId = request.POST["complaintTypeId"]
+        complaintType = request.POST["complaintTypeId"]
         description = request.POST["description"]
         address = request.POST["address"]
         location = request.POST["location"]
 
         try:
             # filtering to prevent duplicity erros.
-            cType = complaintTypes.objects.filter(id=1)#complaintTypeId)
+            cType = complaintTypes.objects.filter(description=complaintType)#complaintTypeId)
             user = userInfo.objects.filter(email=userId)
             
             if cType and user: # save complaint

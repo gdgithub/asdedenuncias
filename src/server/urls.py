@@ -20,7 +20,11 @@ urlpatterns = [
     url(r'^$', default, name='form'),
     url(r'userRegistration/$', userRegistration, name='userRegistration'),
     url(r'authentication/$', authentication, name='authentication'),
-    url(r'getcomplaints/$', getcomplaints, name='getcomplaints'),
+    url(r'getcomplaints/$', getcomplaints, name='getcomplaints'),    
     url(r'newComplaint/$', saveComplaint, name='saveComplaint'),
-    url(r'saveFile/$', saveFile, name='saveFile'),    
+    url(r'saveFile/$', saveFile, name='saveFile'),   
+    url(r'savecomplainttypes/$', saveComplaintTypes, name='saveComplaintTypes'),
+    url(r'updatecomplainttypes/$', updateComplaintTypes, name='updateComplaintTypes'),
+    url(r'deletecomplainttypes/$', deleteComplaintTypes, name='deleteComplaintTypes'),
+    url(r'getcomplainttypes/$', getComplaintTypes, name='getComplaintTypes'),
 ]
