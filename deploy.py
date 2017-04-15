@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import subprocess as sp
 import datetime as dt
+import time
 
 def pushGitHub():
     diff = sp.check_output(['git', 'diff'])
@@ -12,4 +13,6 @@ def pushGitHub():
     else:
         print 'No hay diferencias'
 
-pushGitHub()
+while True:
+    pushGitHub()
+    time.sleep(2)
