@@ -16,4 +16,3 @@ def pushGitHub():
 while True:
     pushGitHub()
     time.sleep(2)
-#s
