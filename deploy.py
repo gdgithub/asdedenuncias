@@ -1,15 +1,14 @@
 #!/usr/bin/env python
-import os
-import subprocess
+import subprocess as sp
 import datetime as dt
 
 def pushGitHub():
-    diff = subprocess.check_output(['git', 'diff'])
+    diff = sp.check_output(['git', 'diff'])
     if diff:
         date = str(dt.datetime.now())
-        os.system('git add .')
-        os.system('git commit -m "{0}"'.format(date))
-        os.system('git push origin master')
+        sp.call(['git', 'add', '.'])
+        sp.call(['git', 'commit', '-m', '"{0}"'.format(date)])
+        sp.call(['git', 'push', 'origin', 'master'])
     else:
         print 'No hay diferencias'
 
