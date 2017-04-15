@@ -12,7 +12,7 @@ def pushGitHub():
         sp.call(['git', 'push', 'origin', 'master'])
     else:
         print 'No hay diferencias'
-#s
+
 while True:
     pushGitHub()
     time.sleep(2)
