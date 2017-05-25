@@ -11,7 +11,6 @@
 
         <div class="parent_div">  
             <div class="complaintsdiv">
-                <!--<img class="back_img" src="/static/images/back.png"></img>-->
                 <h3 class="ui dividing header">Denuncias No. {{complaintId}}</h3>
                 <input type="text" class="location-long hidden" value={{data.long}}></input>
                 <input type="text" class="location-lat hidden" value={{data.lat}}></input>
@@ -19,7 +18,7 @@
                 <section class="info">
                     <table class="ictable">
                         <tr>
-                            <td class="clabel">Municipe:</td>
+                            <td class="clabel">Munícipe:</td>
                             <td class="cvalue">{{data.userName}} (<a class="user_email" href="mailto:{{data.userId}}">{{data.userId}}</a>)</td>
                         </tr>
                         <tr>
@@ -27,16 +26,25 @@
                             <td class="cvalue">{{data.complaintType}}</td>
                         </tr>
                         <tr>
-                            <td class="clabel">Descripcion:</td>
+                            <td class="clabel">Descripción:</td>
                             <td class="cvalue" style="max-width: 100px;  text-overflow:ellipsis; overflow:hidden;">{{data.description}}</td>
                         </tr>
                         <tr>
-                            <td class="clabel">Direccion:</td>
+                            <td class="clabel">Dirección:</td>
                             <td class="cvalue">{{data.address}}</td>
                         </tr>
                         <tr>
-                            <td class="clabel">Ubicacion:</td>
+                            <td class="clabel">Ubicación:</td>
                             <td class="cvalue">{{data.location}}</td>
+                        </tr>
+                        <tr>
+                            <td class="clabel">Anexos:</td>
+                            <td class="cvalue">
+                                {% for file in data.filePaths %}
+                                    <a href="/static/{{file}}" target="_blank">{{file}}</a><br>
+                                {% endfor %}
+                                
+                            </td>
                         </tr>
                     </table>
                 </section>
@@ -44,16 +52,17 @@
                     <div id="map"></div>
                 </section>
                 <section>
-                    <table>
+                    <table class="tbcomplaint-actions">
                         <tr>
                             <td>
-                                <button>En Proceso</button>
+                                <button class="ui button inProcess abtn" id={{complaintId}}>En Proceso</button>
                             </td>
                             <td>
-                                <button>Aceptar</button>
+                                <button class="ui button accept" id={{complaintId}}>Aceptar</button>
                             </td>
                             <td>
-                                <button>Cancelar</button>
+                                <button class="ui button cancel">Cancelar</button>
+
                             </td>
                         </tr>
                     </table>
@@ -75,7 +84,7 @@
             var marker = new google.maps.Marker({
                 position: myLatLng,
                 map: map,
-                title: 'Hello World!'
+                title: 'Ubicación del caso o siniestro.'
             });
         }
                 </script>

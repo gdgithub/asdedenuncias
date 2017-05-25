@@ -23,6 +23,17 @@ def complainttypes_page(request):
 def users_page(request):
     return render(request, 'components/users.html', {})
 
+def termsofuse_page (request):
+    return render(request, 'components/termsofuse.html', {})
+
+def news_page (request):
+    return render(request, 'components/news.html', {})
+
+
+def denuncias_page (request):
+    return render(request, 'components/denuncias.html', {})
+    
+
 def complaint_page(request):
     if request.method == "GET":
         id = request.GET["id"]
@@ -30,6 +41,11 @@ def complaint_page(request):
         data = list(complaint.objects.prefetch_related("complaintTypeId")
                             .prefetch_related("userId").filter(id=id))
         for i in range(len(data)):
+            if data[i].filePath != "" and data[i].filePath != None:
+                filePath = data[i].filePath
+            else:
+                filePath = ","
+
             result = {
                 "id":data[i].id,
                 "complaintType":data[i].complaintTypeId.description,
@@ -37,9 +53,10 @@ def complaint_page(request):
                 "address":data[i].address,
                 "location":data[i].location,
                 "userId":data[i].userId.email,
-                "userName":data[i].userId.name+" "+data[i].userId.lastName,
+                "userName":data[i].userId.name,
                 "lat": data[i].location.split(",")[0],
-                "long": data[i].location.split(",")[1]
+                "long": data[i].location.split(",")[1],
+                "filePaths": list(filePath.split(","))
             }
 
         return render(request, 'components/complaint.html', {

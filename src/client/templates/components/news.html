@@ -1,0 +1,50 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'client/css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static '3rd_party/paginationjs/css/pagination.css' %}" />
+
+    <div class="ui main text container">
+
+        <div class="parent_div">  
+            <div class="complaintsdiv">
+                <h3 class="ui dividing header">Últimas noticias</h3>
+
+                <div class="div_overflow">
+
+                    <form class="ui form formnew" action="/server/savenewsfile/" method="post" enctype="multipart/form-data">
+                        <div class="field">
+                            <label>Título</label>
+                            <input type="text" class="titulo" name="titulo" id="titulo" placeholder="Título de la noticia">
+                        </div>
+                        
+                        <div class="field">
+                            <label>Enlace</label>
+                            <input type="text" class="enlace" name="enlace" id="enlace" placeholder="Enlace">
+                        </div>
+                        <div class="field">
+                            <label>Anexo</label>
+                            <input type="file" name="file" id="file" class="anexo"> </input>
+                        </div>
+                        <div class="field">
+                            <label>Descripción</label>
+                            <textarea type="text" class="descripcion" name="descripcion" id="descripcion" placeholder=""></textarea>
+                        </div>
+                        <input type="hidden" name="rowId" id="rowId" class="rowId" value=""></input>
+                        <button class="ui button save" type="submit">Guardar</button>
+                        <button class="ui button red deleteAll" type="submit">Eliminar todas las noticias</button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript" src="{% static '3rd_party/alertify/js/alertify.js' %}"></script>
+    <script type="text/javascript" src="{% static 'client/js/news.js' %}"></script>
+    <script type="text/javascript" src="{% static '3rd_party/paginationjs/js/pagination.min.js' %}"></script>
+
+{% endblock %}

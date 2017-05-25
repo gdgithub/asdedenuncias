@@ -19,12 +19,27 @@ from views import *
 urlpatterns = [
     url(r'^$', default, name='form'),
     url(r'userRegistration/$', userRegistration, name='userRegistration'),
+    url(r'isRegistered/$', isRegistered, name='isRegistered'),
     url(r'authentication/$', authentication, name='authentication'),
-    url(r'getcomplaints/$', getcomplaints, name='getcomplaints'),    
+    url(r'getcomplaints/$', getcomplaints, name='getcomplaints'),
+    url(r'getcomplaints_orderby/$', getcomplaints_orderby, name='getcomplaints_orderby'),     
     url(r'newComplaint/$', saveComplaint, name='saveComplaint'),
+    url(r'updatecomplaintstatus/$', updateComplaintStatus, name='updateComplaintStatus'),
     url(r'saveFile/$', saveFile, name='saveFile'),   
     url(r'savecomplainttypes/$', saveComplaintTypes, name='saveComplaintTypes'),
     url(r'updatecomplainttypes/$', updateComplaintTypes, name='updateComplaintTypes'),
     url(r'deletecomplainttypes/$', deleteComplaintTypes, name='deleteComplaintTypes'),
     url(r'getcomplainttypes/$', getComplaintTypes, name='getComplaintTypes'),
+    url(r'getpolicyandterms/$', getpolicyandterms, name="getpolicyandterms"),
+    url(r'savepolicyandterms/$', savepolicyandterms, name="savepolicyandterms"),
+    url(r'getusers/$', getUsers, name='getUsers'),
+    url(r'restorepassword/$', restorePassword, name='restorePassword'),
+    url(r'savenews/$', savenews, name='savenews'),
+    url(r'savenewsfile/$', savenewsfile, name='savenewsfile'),
+    url(r'getnews/$', getnews, name='getnews'),
+    url(r'deletenews/$', deletenews, name='deletenews'),
+    url(r'sendemail/$', sendEmail, name='sendEmail'),
+    url(r'sendmailnow/$', sendmailnow, name='sendmailnow'),
+    
+
 ]

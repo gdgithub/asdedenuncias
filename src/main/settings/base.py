@@ -29,6 +29,9 @@ SECRET_KEY = 'vwep=_q(=*+a2n@ur9*n@xdm_2fofhx3)^xqd8y*#q2ca-!t-q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+EMAIL_BACKEND = "sgbackend.SendGridBackend"
+SENDGRID_API_KEY = "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"
+
 # Application definition
 
 PREREQ_APPS = (

@@ -56,3 +56,21 @@
     width: 20px;
     background: rgb(242,242,242);
 }
+
+.tbcomplaint-actions{
+    margin: auto;
+    margin-top: 20px;
+}
+.abtn{
+    padding: 10px;
+    cursor:pointer;
+}
+
+.abtn:hover{
+    text-decoration: underline;
+}
+
+.div_overflow{
+    overflow: scroll;
+	overflow-y:hidden;
+}

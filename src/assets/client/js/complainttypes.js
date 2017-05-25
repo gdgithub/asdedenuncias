@@ -25,69 +25,81 @@ $(document).ready(function() {
         bodyTable.html("");
         getComplaintTypes(function(data){
             data = $.parseJSON(data);
-            console.log(data);
             if(data.success){
                 data = data.data;
-                data.forEach(function(element,i) {
-                    bodyTable.append(`
-                    <tr>
-                        <td>`+(i+1)+`</td>
-                        <td>`+element.description+`</td>
-                        <td>
-                            <div class="ui small basic icon buttons">
-                                <button class="ui button edit" value=`+element.id+`><i class="file icon"></i></button>
-                                <button class="ui button remove" value=`+element.id+`><i class="delete icon"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                    `);
-                }, this);
-                
-            $(".edit").click(function(){
-                var id = $(this).val();
-                alertify
-                .defaultValue("")
-                .prompt("Introduzca el nuevo valor",
-                    function (val, ev) {
-                    ev.preventDefault();
 
-                    var dataDic = {
-                        "id":id,
-                        "description":val,
-                        "csrfmiddlewaretoken": $("input[name=csrfmiddlewaretoken]").val()
-                    }
-                    postData("/server/updatecomplainttypes/",dataDic,function(data){
-                        data = $.parseJSON(data);
-                        if(data.success){
-                            setTableComplaintValues();
-                        }
+                $(".actions").pagination({
+                    dataSource: data,
+                    pageSize: 10,
+                    showGoInput: true,
+                    showGoButton: true,
+                    goButtonText:"Ir",
+                    callback: function(data, pagination) {
+                        var total = parseInt(pagination.pageSize);
+                        var currentPage = parseInt(pagination.pageNumber);
+                        bodyTable.html("");
+                        data.forEach(function(element,i) {
+                            bodyTable.append(`
+                            <tr>
+                                <td>`+(i+1)+`</td>
+                                <td>`+element.description+`</td>
+                                <td>
+                                    <div class="ui small basic icon buttons">
+                                        <button class="ui button edit" value=`+element.id+`><i class="file icon"></i></button>
+                                        <button class="ui button remove" value=`+element.id+`><i class="delete icon"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            `);
+                        }, this);
+                        
+                    $(".edit").click(function(){
+                        var id = $(this).val();
+                        alertify
+                        .defaultValue("")
+                        .prompt("Introduzca el nuevo valor",
+                            function (val, ev) {
+                            ev.preventDefault();
+
+                            var dataDic = {
+                                "id":id,
+                                "description":val,
+                                "csrfmiddlewaretoken": $("input[name=csrfmiddlewaretoken]").val()
+                            }
+                            postData("/server/updatecomplainttypes/",dataDic,function(data){
+                                data = $.parseJSON(data);
+                                if(data.success){
+                                    setTableComplaintValues();
+                                }
+                            });
+                            }, function(ev) {
+
+                            ev.preventDefault();
+                            }
+                        );
                     });
-                    }, function(ev) {
 
-                    ev.preventDefault();
-                    }
-                );
-            });
-
-            $(".remove").click(function(){
-                var id = $(this).val();
-                alertify.confirm("¿Desea eliminar este valor?", function () {
-                var dataDic = {
-                        "id":id,
-                        "csrfmiddlewaretoken": $("input[name=csrfmiddlewaretoken]").val()
-                    }
-                    postData("/server/deletecomplainttypes/",dataDic,function(data){
-                        data = $.parseJSON(data);
-                        if(data.success){
-                            setTableComplaintValues();
-                        }
+                    $(".remove").click(function(){
+                        var id = $(this).val();
+                        alertify.confirm("¿Desea eliminar este valor?", function () {
+                        var dataDic = {
+                                "id":id,
+                                "csrfmiddlewaretoken": $("input[name=csrfmiddlewaretoken]").val()
+                            }
+                            postData("/server/deletecomplainttypes/",dataDic,function(data){
+                                data = $.parseJSON(data);
+                                if(data.success){
+                                    setTableComplaintValues();
+                                }
+                            });
+                            
+                        }, function() {
+                        });
                     });
-                    
-                }, function() {
+                    }
                 });
-            });
-
-            }else{
+            }
+            else{
                 alertify.error(data.log);
             }
         });

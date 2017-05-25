@@ -46,7 +46,7 @@ $(document).ready(function() {
     }
 
     function autoLogin(){
-        if(getCookie("email").length > 0 && getCookie("pwd").length){
+        if(getCookie("email").length > 0 && getCookie("pwd").length > 0){
             var dataDic = {
                 "email":getCookie("email"),
                 "password":getCookie("pwd"),
@@ -55,7 +55,10 @@ $(document).ready(function() {
             postData("/server/authentication/",dataDic,function(data){
                 data = $.parseJSON(data);
                 if(data.authenticated){
-                    location.assign("/client/admin");
+                    if(data.rol == "admin" && (window.location.pathname != "/client/admin" && window.location.pathname != "/client/denuncias"))
+                        location.assign("/client/admin");
+                    else if (data.rol == "user" && window.location.pathname != "/client/denuncias")
+                        location.assign("/client/denuncias");
                 }
             });
         }
@@ -78,7 +81,14 @@ $(document).ready(function() {
                 if(data.authenticated){
                     createCookie("email",email,3000);
                     createCookie("pwd",password,3000);
-                    location.assign("/client/admin");
+                    createCookie("rol",data.rol,3000);
+
+                    //console.log(data.rol);
+                    if(data.rol == "admin")
+                        location.assign("/client/admin");
+                    else if (data.rol == "user")
+                        location.assign("/client/denuncias");
+                    //location.assign("/client/admin");
                 }
                 else{
                     if(!data.userExist){

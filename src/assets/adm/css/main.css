@@ -5,8 +5,10 @@ body{
 .spacesdivider{
 	width: 100%;
 }
-.account{
-	color:red;
+
+.pagecontent{
+	padding-bottom: 50px;
+	margin-bottom: 50px;
 }
 
 

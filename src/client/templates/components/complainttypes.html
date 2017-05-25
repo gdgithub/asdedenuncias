@@ -4,6 +4,7 @@
 
 {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'client/css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static '3rd_party/paginationjs/css/pagination.css' %}" />
 
     <div class="ui main text container">
 
@@ -19,35 +20,26 @@
                     </div>
                     <div class="results"></div>
                 </div>-->
+                <div class="div_overflow">
 
-                    <table class="ui compact celled definition table complaints-table">
-                        <thead class="full-width">
-                        <tr>
-                            <th>#</th>
-                            <th>Descripcion</th>
-                            <th>Opciones</th>
-                        </tr>
-                        </thead>
-                        <tbody class="complaintsTypes body-table">
+                        <table class="ui compact celled definition table complaints-table">
+                            <thead class="full-width">
+                            <tr>
+                                <th>#</th>
+                                <th>Descripción</th>
+                                <th>Opciones</th>
+                            </tr>
+                            </thead>
+                            <tbody class="complaintsTypes body-table">
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
 
-                <div class="form actions">
-                    <div class="ui right floated pagination menu">
-                        <a class="icon item">
-                        <i class="left chevron icon"></i>
-                        </a>
-                        <a class="item">1</a>
-                        <a class="item">2</a>
-                        <a class="item">3</a>
-                        <a class="item">4</a>
-                        <a class="icon item">
-                        <i class="right chevron icon"></i>
-                        </a>
+                    <div class="form actions">
+                        
                     </div>
+                    <center><a class="ui button new abtn">Nuevo</a></center>
                 </div>
-                <a class="new">Nuevo</a>
             </div>
 
         </div>
@@ -55,4 +47,6 @@
 
     <script type="text/javascript" src="{% static '3rd_party/alertify/js/alertify.js' %}"></script>
     <script type="text/javascript" src="{% static 'client/js/complainttypes.js' %}"></script>
+    <script type="text/javascript" src="{% static '3rd_party/paginationjs/js/pagination.min.js' %}"></script>
+
 {% endblock %}

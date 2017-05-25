@@ -48,6 +48,7 @@ $(document).ready(function() {
     $(".logOut").click(function(){
         deleteCookie("email");
         deleteCookie("pwd");
+        deleteCookie("rol");
         location.assign("/client/login");
     });
 
@@ -73,5 +74,24 @@ $(document).ready(function() {
     }
 
     hasNewRequest();
+
+   function checkLogStatus(){
+       console.log("s");
+        if (getCookie("email").length == 0 || getCookie("pwd").length == 0 || getCookie("rol").length == 0){
+            location.assign("/client/login");
+        }
+        else{
+            if(getCookie("rol")=="user" && window.location.pathname != "/client/denuncias"){
+                deleteCookie("email");
+                deleteCookie("pwd");
+                deleteCookie("rol");
+                location.assign("/client/login");
+            }
+            window.setTimeout(function(){
+                checkLogStatus();
+            },5000);
+        }
+    }
+    checkLogStatus();
     
 });

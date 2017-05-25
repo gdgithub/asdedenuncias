@@ -22,5 +22,9 @@ urlpatterns = [
     url(r'^admin/complaint$',complaint_page, name='complaint_page'),
     url(r'^admin/complainttypes$',complainttypes_page, name='complainttypes_page'),
     url(r'^admin/users$',users_page, name='users_page'),
+    url(r'^admin/termsofuse$',termsofuse_page, name='termsofuse_page'),
+    url(r'^admin/news$',news_page, name='news_page'),
+    url(r'^denuncias$',denuncias_page, name='denuncias_page'),
+
     
 ]

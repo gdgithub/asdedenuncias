@@ -1,0 +1,214 @@
+<html lang="es">
+
+<head>
+    <meta content=t ext/html charset=UTF-8>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=yes" />
+
+    <!-- Site Properties -->
+    <title>ASDE - Iniciar Sesion</title>
+
+    {% load staticfiles %}
+
+    <link rel="stylesheet" type="text/css" href="{% static '3rd_party/semantic/semantic.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/site.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/container.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/menu.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/dropdown.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}" />
+
+    <style type="text/css">
+        body {
+            /*background-color: #FFFFFF;*/
+        }
+        
+        .ui.menu .item img.logo {
+            margin-right: 1.5em;
+        }
+        
+        .main.container {
+            margin-top: 7em;
+        }
+        
+        .wireframe {
+            margin-top: 2em;
+        }
+        
+        .ui.footer.segment {
+            margin: 5em 0em 0em;
+            padding: 5em 0em;
+        }
+
+        .spacesdivider{
+            width: 100%;
+        }
+
+        .text.container{
+            background: white;
+            padding: 20px;
+        }
+
+        #map {
+            height: 300px;
+        }
+    
+        #floating-panel {
+            position: absolute;
+            top: 10px;
+            left: 25%;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #999;
+            text-align: center;
+            font-family: 'Roboto','sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    {% csrf_token %}
+    <div class="ui fixed inverted menu">
+        <div class="ui container">
+            <a href="#" class="header item">
+                <img class="logo" src="{% static 'adm/img/logo.svg' %}"> ASDE APP
+            </a>
+            <a class="spacesdivider"></a>
+            <div class="ui simple dropdown item account">
+                Cuenta <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a class="item logOut" >Cerrar Sesion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui main text container">
+
+        <div class="parent_div">  
+            <div class="complaintsdiv">
+                <h3 class="ui dividing header">Nueva denuncia</h3>
+
+                <div class="div_overflow">
+
+                    <form class="ui form">
+                        <div class="field">
+                            <label>Tipo de denuncia</label>
+                            <select class="ui dropdown type">
+                  
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Dirección</label>
+                            <input type="text" class="address" placeholder="Dirección del caso"></input>
+                        </div>
+                        <div class="field">
+                            <label>Descripción</label>
+                            <textarea type="text" class="description" placeholder="Descripción del caso"></textarea>
+                        </div>
+                        <div class="field">
+                            <label>Ubicación</label>
+                            <input type="hidden" class="location" placeholder="Ubicación del caso"></input>
+                        </div>
+                        
+                        <div class="field">
+
+                            
+                            <div id="map"></div>
+                            <p>Marqué la ubicación del caso o siniestro en el mapa.</p>
+                            <script>
+
+                            // In the following example, markers appear when the user clicks on the map.
+                            // The markers are stored in an array.
+                            // The user can then click an option to hide, show or delete the markers.
+                            var map;
+                            var markers = [];
+
+                            var latitude = 0.0000;
+                            var longitude = 0.0000;
+
+                            function initMap() {
+                                var haightAshbury = {lat: 18.49910000, lng: -69.79950000};
+
+                                map = new google.maps.Map(document.getElementById('map'), {
+                                zoom: 12,
+                                center: haightAshbury
+                                });
+
+                                // This event listener will call addMarker() when the map is clicked.
+                                map.addListener('click', function(event) {
+                                addMarker(event.latLng);
+
+                                latitude = event.latLng.lat();
+                                longitude = event.latLng.lng();
+                                document.getElementsByClassName("location")[0].value=latitude+","+longitude;
+                                });
+
+                                // Adds a marker at the center of the map.
+                                addMarker(haightAshbury);
+                            }
+
+                            // Adds a marker to the map and push to the array.
+                            function addMarker(location) {
+                                deleteMarkers();
+                                var marker = new google.maps.Marker({
+                                position: location,
+                                map: map
+                                });
+                                markers.push(marker);
+                            }
+                            
+
+                            // Sets the map on all markers in the array.
+                            function setMapOnAll(map) {
+                                for (var i = 0; i < markers.length; i++) {
+                                markers[i].setMap(map);
+                                }
+                            }
+
+                            // Removes the markers from the map, but keeps them in the array.
+                            function clearMarkers() {
+                                setMapOnAll(null);
+                            }
+
+                            // Shows any markers currently in the array.
+                            function showMarkers() {
+                                setMapOnAll(map);
+                            }
+
+                            // Deletes all markers in the array by removing references to them.
+                            function deleteMarkers() {
+                                clearMarkers();
+                                markers = [];
+                            }
+                            </script>
+                            <script async defer
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvLdrWSUbltOgtfvZKyv2_5ydt5PGgEdM&callback=initMap">
+                            </script>
+
+                        </div>
+                        <button class="ui button sendComplaint" type="button">Enviar</button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript" src="{% static '3rd_party/jquery/jquery-2.2.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'client/js/login.js' %}"></script>
+    <script type="text/javascript" src="{% static 'client/js/denuncias.js' %}"></script>
+    <script type="text/javascript" src="{% static '3rd_party/semantic/semantic.js' %}"></script>
+    <script type="text/javascript" src="{% static '3rd_party/alertify/js/alertify.js' %}"></script>
+
+</body>
+<footer>
+    <center><p style="font-size:12px; color:rgb(100,100,100); margin-bottom:15px;">©2017 - Ayuntamiento Santo Domingo Este.</p></center>
+</footer>
+</html>
