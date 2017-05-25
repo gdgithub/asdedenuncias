@@ -536,6 +536,7 @@ def savenewsfile(request):
 def saveFile(request):
     success = False
     log = None
+    objId = None
     if request.method == "POST":
         objId = request.POST["objId"]
         fileName = request.POST["uFileName"]
@@ -560,6 +561,7 @@ def saveFile(request):
         
     return HttpResponse(json.dumps({
         "success": success,
+        "objId":objId,
         "log": log
         }))
 
