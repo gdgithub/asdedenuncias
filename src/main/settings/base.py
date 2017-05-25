@@ -30,7 +30,8 @@ SECRET_KEY = 'vwep=_q(=*+a2n@ur9*n@xdm_2fofhx3)^xqd8y*#q2ca-!t-q'
 DEBUG = True
 
 EMAIL_BACKEND = "sgbackend.SendGridBackend"
-SENDGRID_API_KEY = "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"
+#SENDGRID_API_KEY = "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"
+SENDGRID_API_KEY = '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'
 
 # Application definition
 
