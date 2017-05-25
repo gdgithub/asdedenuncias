@@ -4,4 +4,4 @@
 *.html~
 *.css~
 venv/
-
+src/media/
