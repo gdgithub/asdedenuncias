@@ -17,6 +17,7 @@ from django.conf.urls import url
 from views import *
 
 urlpatterns = [
+    url(r'^$', default, name='client'),
     url(r'^login$',login_page, name='login_page'),
     url(r'^admin$',admin_page, name='admin_page'),
     url(r'^admin/complaint$',complaint_page, name='complaint_page'),

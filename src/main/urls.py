@@ -20,6 +20,6 @@ import view
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^server/', include('src.server.urls')),
-    url(r'^client/', include('src.client.urls')),
+    url(r'^client/', include('src.client.urls'), name='client'),
     url(r'^$', view.main, name='main'),
 ]

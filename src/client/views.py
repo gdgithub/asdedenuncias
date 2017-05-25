@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from models import *
 from src.common.functions import *
 from src.server.views import *
@@ -9,7 +11,7 @@ from django.core import serializers
 # Create your views here.
 
 def default(request):
-    return HttpResponse('none')
+    return HttpResponseRedirect(reverse('login_page'))
 
 def login_page(request):
     return render(request, 'components/login.html', {})
