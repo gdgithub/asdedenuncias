@@ -314,7 +314,7 @@ def saveComplaint(request):
     objId = None
     if request.method == "POST":
         userId = request.POST["userId"].lower()
-        complaintType = request.POST["complaintType"]
+        complaintType = unicode(request.POST["complaintType"],"utf-8")
         description = request.POST["description"]
         address = request.POST["address"]
         location = request.POST["location"]
